@@ -1,0 +1,8 @@
+{
+  "name": "todo_app_react_typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Valentino30/Todo_App_React_Typescript.git",
+  "author": "Valentino <valentino@secret-source.eu>",
+  "license": "MIT"
+}
