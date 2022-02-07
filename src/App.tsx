@@ -5,5 +5,3 @@ export default function App() {
     </div>
   );
 }
-
-const none = 0;
