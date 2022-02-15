@@ -9,7 +9,5 @@
     ],
     "@babel/preset-typescript"
   ],
-  // This substitutes the @babel/polyfill plugin previously part of the @babel/core package
-  // Source: https://babeljs.io/docs/en/babel-polyfill
   "plugins": [["@babel/plugin-transform-runtime"]]
 }
