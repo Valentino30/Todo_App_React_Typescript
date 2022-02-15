@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
-import Form from '../../components/Form';
-import Input from '../../components/Input';
-import Header from '../../components/Header';
-import Button from '../../components/Button';
+import Form from '../../shared/Form';
+import Input from '../../shared/Input';
+import Header from '../../shared/Header';
+import Button from '../../shared/Button';
 
 import { useAuth } from '../../context/auth';
 
 import { CredentialsType } from '../../types/auth';
-import Text from '../../components/Text';
+import Text from '../../shared/Text';
 
 export default function Auth() {
   const { register } = useAuth();
