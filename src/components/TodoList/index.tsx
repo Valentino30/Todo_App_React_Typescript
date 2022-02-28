@@ -6,7 +6,7 @@ import Header from '../../shared/Header';
 
 import { useTodo } from '../../context/todo';
 
-export default function TodoList() {
+const TodoList: React.FC = () => {
   const [todoName, setTodoName] = useState('');
   const { todos, addTodo } = useTodo();
 
@@ -34,4 +34,6 @@ export default function TodoList() {
       <List listItems={todos} />
     </>
   );
-}
+};
+
+export default TodoList;

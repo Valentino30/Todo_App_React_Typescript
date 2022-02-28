@@ -1,4 +1,8 @@
+import React from 'react';
 import { nanoid } from 'nanoid';
+import { render } from '@testing-library/react';
+
+import { TodoProvider } from '../context/todo';
 
 const delay = (delay: number) => {
   return new Promise((resolve) => {
@@ -19,4 +23,12 @@ export const apiCall = {
     };
     return response;
   },
+};
+
+export const renderWithContext = (Component: React.FC) => {
+  render(
+    <TodoProvider>
+      <Component />
+    </TodoProvider>
+  );
 };
