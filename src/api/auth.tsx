@@ -1,7 +1,10 @@
 import { apiCall } from '.';
-import { CredentialsType } from '../types/auth';
+import { LoginCredentialsType, RegisterCredentialsType } from '../types/auth';
 
-export const registerRequest = async ({ email, password }: CredentialsType) => {
+export const registerRequest = async ({
+  email,
+  password,
+}: RegisterCredentialsType) => {
   const response = await apiCall.post('/register', {
     email,
     password,
@@ -9,7 +12,10 @@ export const registerRequest = async ({ email, password }: CredentialsType) => {
   return response.data;
 };
 
-export const loginRequest = async ({ email, password }: CredentialsType) => {
+export const loginRequest = async ({
+  email,
+  password,
+}: LoginCredentialsType) => {
   const response = await apiCall.post('/login', {
     email,
     password,
