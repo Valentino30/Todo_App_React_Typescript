@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
+import Text from '../../shared/Text';
 import Form from '../../shared/Form';
 import Input from '../../shared/Input';
 import Header from '../../shared/Header';
 import Button from '../../shared/Button';
 
 import { useAuth } from '../../context/auth';
-
-import { CredentialsType } from '../../types/auth';
-import Text from '../../shared/Text';
+import { RegisterCredentialsType } from '../../types/auth';
 
 export default function Auth() {
-  const { register } = useAuth();
   const { pathname } = useLocation();
-  const [credentials, setCredentials] = useState<CredentialsType>({
+  const { register, login, isAuthenticating } = useAuth();
+  const [credentials, setCredentials] = useState<RegisterCredentialsType>({
     name: '',
     email: '',
     password: '',
@@ -44,9 +43,11 @@ export default function Auth() {
     ) {
       alert('Please insert matching passwords');
     } else {
-      register(credentials);
+      isRegisterPage ? register(credentials) : login(credentials);
     }
   };
+
+  if (isAuthenticating) return <h1>Loading...</h1>;
 
   return (
     <div style={{ display: 'flex' }}>

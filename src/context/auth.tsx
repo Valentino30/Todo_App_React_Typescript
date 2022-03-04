@@ -3,9 +3,10 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 import {
   UserType,
-  CredentialsType,
   AuthContextType,
   AuthProviderProps,
+  LoginCredentialsType,
+  RegisterCredentialsType,
 } from '../types/auth';
 import { loginRequest, registerRequest } from '../api/auth';
 
@@ -16,6 +17,7 @@ export const useAuth = () => {
 };
 
 export default function AuthProvider({ children }: AuthProviderProps) {
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<UserType | null>(null);
 
@@ -30,27 +32,33 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     }
   }, []);
 
-  const register = (credentials: CredentialsType) => {
+  const register = (credentials: RegisterCredentialsType) => {
+    setIsAuthenticating(true);
     registerRequest(credentials)
       .then((data) => {
         setUser(data);
         setIsAuthenticated(true);
+        setIsAuthenticating(false);
         Cookies.set('token', data.token);
         Cookies.set('email', data.email);
         Cookies.set('id', data.id);
       })
       .catch((error) => {
+        setIsAuthenticating(false);
         alert(error.response.data.error);
       });
   };
 
-  const login = (credentials: CredentialsType) => {
+  const login = (credentials: LoginCredentialsType) => {
+    setIsAuthenticating(true);
     loginRequest(credentials)
       .then((data) => {
         setIsAuthenticated(true);
+        setIsAuthenticating(false);
         setUser(data);
       })
       .catch((error) => {
+        setIsAuthenticating(false);
         alert(error.response.data.error);
       });
   };
@@ -65,7 +73,14 @@ export default function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, user, login, logout, register }}
+      value={{
+        user,
+        login,
+        logout,
+        register,
+        isAuthenticated,
+        isAuthenticating,
+      }}
     >
       {children}
     </AuthContext.Provider>
